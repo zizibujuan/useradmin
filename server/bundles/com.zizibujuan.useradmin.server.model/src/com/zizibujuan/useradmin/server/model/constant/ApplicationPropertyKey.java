@@ -22,4 +22,9 @@ public class ApplicationPropertyKey {
 	 */
 	public static final String INVALID_PASSWORD_ATTEMPTS = "invalidPasswordAttempts";
 	
+	/**
+	 * 记录临时用户标识的当前值
+	 */
+	public static final String DRIP_COOKIE_MAX_USER_ID = "drip.cookie.max.userId";
+
 }
