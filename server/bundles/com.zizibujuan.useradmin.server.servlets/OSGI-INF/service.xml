@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" 
+	activate="activate"
+	deactivate="deactivate"
+	enabled="true"
+	name="com.zizibujuan.useradmin.server.servlets.serviceHolder">
+	<implementation class="com.zizibujuan.useradmin.server.servlets.ServiceHolder"/>
+   
+	
+		
+	<reference 
+		bind="setUserService" 
+		unbind="unsetUserService" 
+		cardinality="0..1" 
+		interface="com.zizibujuan.useradmin.server.service.UserService" 
+		name="userService" 
+		policy="dynamic" />
+
+
+		
+	<reference 
+		bind="setApplicationPropertyService" 
+		unbind="unsetApplicationPropertyService" 
+		cardinality="0..1" 
+		interface="com.zizibujuan.cm.server.service.ApplicationPropertyService" 
+		name="applicationPropertyService" 
+		policy="dynamic" />
+		
+	<reference 
+		bind="setUserBindService" 
+		unbind="unsetUserBindService" 
+		cardinality="0..1" 
+		interface="com.zizibujuan.useradmin.server.service.UserBindService" 
+		name="userBindService" 
+		policy="dynamic" />
+
+	<reference 
+		bind="setUserRelationService" 
+		unbind="unsetUserRelationService" 
+		cardinality="0..1" 
+		interface="com.zizibujuan.useradmin.server.service.UserRelationService" 
+		name="userRelationService" 
+		policy="dynamic" />		
+		
+</scr:component>
