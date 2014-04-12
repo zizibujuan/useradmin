@@ -25,7 +25,7 @@ public class SignUpCheckServlet extends BaseServlet {
 	private static final long serialVersionUID = 3796956621336183000L;
 	private UserService userService;
 	public SignUpCheckServlet(){
-		userService = ServiceHolder.getDefault().getUserService();
+		userService = UserAdminServiceHolder.getDefault().getUserService();
 	}
 
 	@Override

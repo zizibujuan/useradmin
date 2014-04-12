@@ -33,7 +33,7 @@ public class UserSettingServlet extends BaseServlet {
 	private UserService userService;
 	
 	public UserSettingServlet(){
-		userService = ServiceHolder.getDefault().getUserService();
+		userService = UserAdminServiceHolder.getDefault().getUserService();
 	}
 
 	@Override

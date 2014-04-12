@@ -55,7 +55,7 @@ public class LoginServlet extends BaseServlet {
 	private List<String> errors;
 	
 	public LoginServlet() {
-		userService = ServiceHolder.getDefault().getUserService();
+		userService = UserAdminServiceHolder.getDefault().getUserService();
 	}
 
 	/**

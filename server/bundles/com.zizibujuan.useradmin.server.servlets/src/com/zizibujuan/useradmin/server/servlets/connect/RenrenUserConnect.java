@@ -31,7 +31,7 @@ import com.zizibujuan.useradmin.server.model.UserInfo;
 import com.zizibujuan.useradmin.server.model.constant.OAuthConstants;
 import com.zizibujuan.useradmin.server.service.UserBindService;
 import com.zizibujuan.useradmin.server.service.UserService;
-import com.zizibujuan.useradmin.server.servlets.ServiceHolder;
+import com.zizibujuan.useradmin.server.servlets.UserAdminServiceHolder;
 import com.zizibujuan.drip.server.util.Gender;
 
 /**
@@ -47,7 +47,7 @@ public class RenrenUserConnect extends UserConnect {
 	@Override
 	protected void toLoginPage(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		// TODO:改为一次数据库请求，获取一组参数
-		ApplicationPropertyService applicationPropertyService = ServiceHolder.getDefault().getApplicationPropertyService();
+		ApplicationPropertyService applicationPropertyService = UserAdminServiceHolder.getDefault().getApplicationPropertyService();
 		String appId = applicationPropertyService.getForString(OAuthConstants.KEY_RENREN_APP_ID);
 		String hrefTemplate = applicationPropertyService.getForString(OAuthConstants.KEY_RENREN_LOGIN_PAGE_URL_TMPL);
 		String redirectUri = applicationPropertyService.getForString(OAuthConstants.KEY_RENREN_REDIRECT_URL);
@@ -61,9 +61,9 @@ public class RenrenUserConnect extends UserConnect {
 	protected void login(HttpServletRequest req, HttpServletResponse resp,
 			String code) throws IOException {
 
-		UserService userService = ServiceHolder.getDefault().getUserService();
-		ApplicationPropertyService applicationPropertyService = ServiceHolder.getDefault().getApplicationPropertyService();
-		UserBindService userBindService = ServiceHolder.getDefault().getUserBindService();
+		UserService userService = UserAdminServiceHolder.getDefault().getUserService();
+		ApplicationPropertyService applicationPropertyService = UserAdminServiceHolder.getDefault().getApplicationPropertyService();
+		UserBindService userBindService = UserAdminServiceHolder.getDefault().getUserBindService();
 		
 		String redirectUri = applicationPropertyService.getForString(OAuthConstants.KEY_RENREN_REDIRECT_URL);
 		
@@ -191,7 +191,7 @@ public class RenrenUserConnect extends UserConnect {
 			value = "中国";
 		}
 		
-		ApplicationPropertyService applicationPropertyService = ServiceHolder.getDefault().getApplicationPropertyService();
+		ApplicationPropertyService applicationPropertyService = UserAdminServiceHolder.getDefault().getApplicationPropertyService();
 		return applicationPropertyService.getCityCodeByValue(value);
 	}
 	

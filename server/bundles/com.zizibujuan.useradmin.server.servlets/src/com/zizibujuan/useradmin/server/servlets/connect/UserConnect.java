@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.zizibujuan.useradmin.server.model.Avatar;
 import com.zizibujuan.useradmin.server.service.UserService;
-import com.zizibujuan.useradmin.server.servlets.ServiceHolder;
+import com.zizibujuan.useradmin.server.servlets.UserAdminServiceHolder;
 import com.zizibujuan.drip.server.util.constant.CookieConstants;
 import com.zizibujuan.drip.server.util.servlet.CookieUtil;
 import com.zizibujuan.drip.server.util.servlet.UserSession;
@@ -20,7 +20,7 @@ import com.zizibujuan.drip.server.util.servlet.UserSession;
  * @since 0.0.1
  */
 public abstract class UserConnect {
-	protected UserService userService = ServiceHolder.getDefault().getUserService();
+	protected UserService userService = UserAdminServiceHolder.getDefault().getUserService();
 	/**
 	 * 登录功能被第三方网站托管
 	 * 

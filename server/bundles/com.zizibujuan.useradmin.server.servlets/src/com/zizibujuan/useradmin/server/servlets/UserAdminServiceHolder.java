@@ -20,13 +20,13 @@ import com.zizibujuan.useradmin.server.service.UserService;
  * @author 金正伟
  * @since 0.0.1
  */
-public class ServiceHolder {
+public class UserAdminServiceHolder {
 	private static final Logger logger = LoggerFactory
-			.getLogger(ServiceHolder.class);
+			.getLogger(UserAdminServiceHolder.class);
 
-	private static ServiceHolder singleton;
+	private static UserAdminServiceHolder singleton;
 
-	public static ServiceHolder getDefault() {
+	public static UserAdminServiceHolder getDefault() {
 		return singleton;
 	}
 

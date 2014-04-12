@@ -3,8 +3,8 @@
 	activate="activate"
 	deactivate="deactivate"
 	enabled="true"
-	name="com.zizibujuan.useradmin.server.servlets.serviceHolder">
-	<implementation class="com.zizibujuan.useradmin.server.servlets.ServiceHolder"/>
+	name="com.zizibujuan.useradmin.server.servlets.userAdminServiceHolder">
+	<implementation class="com.zizibujuan.useradmin.server.servlets.UserAdminServiceHolder"/>
    
 	
 		

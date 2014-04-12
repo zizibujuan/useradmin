@@ -21,7 +21,7 @@ import com.zizibujuan.drip.server.util.Gender;
 import com.zizibujuan.useradmin.server.model.UserBindInfo;
 import com.zizibujuan.useradmin.server.model.constant.OAuthConstants;
 import com.zizibujuan.useradmin.server.service.UserBindService;
-import com.zizibujuan.useradmin.server.servlets.ServiceHolder;
+import com.zizibujuan.useradmin.server.servlets.UserAdminServiceHolder;
 
 /**
  * qq用户登录
@@ -32,7 +32,7 @@ import com.zizibujuan.useradmin.server.servlets.ServiceHolder;
 public class QQUserConnect extends UserConnect {
 	
 	private static final Logger logger = LoggerFactory.getLogger(QQUserConnect.class);
-	private UserBindService userBindService = ServiceHolder.getDefault().getUserBindService();
+	private UserBindService userBindService = UserAdminServiceHolder.getDefault().getUserBindService();
 
 	@Override
 	protected void toLoginPage(HttpServletRequest req, HttpServletResponse resp) throws IOException {

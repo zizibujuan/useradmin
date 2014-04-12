@@ -44,7 +44,7 @@ public class UserServlet extends BaseServlet {
 	
 	public UserServlet(){
 		errors = new ArrayList<String>();
-		userService = ServiceHolder.getDefault().getUserService();
+		userService = UserAdminServiceHolder.getDefault().getUserService();
 	}
 
 	@Override
