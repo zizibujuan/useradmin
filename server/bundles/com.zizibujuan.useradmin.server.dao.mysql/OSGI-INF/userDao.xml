@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" 
-	name="com.zizibujuan.drip.server.dao.mysql.userDaoImpl">
-   <implementation class="com.zizibujuan.drip.server.dao.mysql.UserDaoImpl"/>
+	name="com.zizibujuan.useradmin.server.dao.mysql.userDaoImpl">
+   <implementation class="com.zizibujuan.useradmin.server.dao.mysql.UserDaoImpl"/>
 	
 	<reference 
    		bind="setUserRelationDao" 
    		unbind="unsetUserRelationDao" 
    		cardinality="0..1" 
-   		interface="com.zizibujuan.drip.server.dao.UserRelationDao" 
+   		interface="com.zizibujuan.useradmin.server.dao.UserRelationDao" 
    		name="userRelationDao" 
    		policy="dynamic"/>
    		
@@ -15,7 +15,7 @@
    		bind="setUserBindDao" 
    		unbind="unsetUserBindDao" 
    		cardinality="0..1" 
-   		interface="com.zizibujuan.drip.server.dao.UserBindDao" 
+   		interface="com.zizibujuan.useradmin.server.dao.UserBindDao" 
    		name="userBindDao" 
    		policy="dynamic"/>
    		
@@ -23,7 +23,7 @@
    		bind="setUserAvatarDao" 
    		unbind="unsetUserAvatarDao" 
    		cardinality="0..1" 
-   		interface="com.zizibujuan.drip.server.dao.UserAvatarDao" 
+   		interface="com.zizibujuan.useradmin.server.dao.UserAvatarDao" 
    		name="userAvatarDao" 
    		policy="dynamic"/>
    	
@@ -31,7 +31,7 @@
    		bind="setConnectUserDao" 
    		unbind="unsetConnectUserDao" 
    		cardinality="0..1" 
-   		interface="com.zizibujuan.drip.server.dao.ConnectUserDao" 
+   		interface="com.zizibujuan.useradmin.server.dao.ConnectUserDao" 
    		name="connectUserDao" 
    		policy="dynamic"/>
    		
@@ -39,7 +39,7 @@
    		bind="setUserAttributesDao" 
    		unbind="unsetUserAttributesDao" 
    		cardinality="0..1" 
-   		interface="com.zizibujuan.drip.server.dao.UserAttributesDao" 
+   		interface="com.zizibujuan.useradmin.server.dao.UserAttributesDao" 
    		name="userAttributesDao" 
    		policy="dynamic"/>
    		
@@ -47,11 +47,11 @@
    		bind="setUserStatisticsDao" 
    		unbind="unsetUserStatisticsDao" 
    		cardinality="0..1" 
-   		interface="com.zizibujuan.drip.server.dao.UserStatisticsDao" 
+   		interface="com.zizibujuan.useradmin.server.dao.UserStatisticsDao" 
    		name="userStatisticsDao" 
    		policy="dynamic"/>	
    			
    <service>
-      <provide interface="com.zizibujuan.drip.server.dao.UserDao"/>
+      <provide interface="com.zizibujuan.useradmin.server.dao.UserDao"/>
    </service>
 </scr:component>

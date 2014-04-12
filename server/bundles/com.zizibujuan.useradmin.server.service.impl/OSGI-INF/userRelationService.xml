@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" 
-	name="com.zizibujuan.drip.server.service.impl.userRelationServiceImpl">
-   <implementation class="com.zizibujuan.drip.server.service.impl.UserRelationServiceImpl"/>
+	name="com.zizibujuan.useradmin.server.service.impl.userRelationServiceImpl">
+   <implementation class="com.zizibujuan.useradmin.server.service.impl.UserRelationServiceImpl"/>
    <reference 
    		bind="setUserRelationDao" 
    		unbind="unsetUserRelationDao" 
    		cardinality="0..1" 
-   		interface="com.zizibujuan.drip.server.dao.UserRelationDao" 
+   		interface="com.zizibujuan.useradmin.server.dao.UserRelationDao" 
    		name="userRelationDao" 
    		policy="dynamic"/>
    
@@ -14,7 +14,7 @@
    		bind="setUserBindDao" 
    		unbind="unsetUserBindDao" 
    		cardinality="0..1" 
-   		interface="com.zizibujuan.drip.server.dao.UserBindDao" 
+   		interface="com.zizibujuan.useradmin.server.dao.UserBindDao" 
    		name="userBindDao" 
    		policy="dynamic"/>
    		
@@ -22,11 +22,11 @@
    		bind="setUserService" 
    		unbind="unsetUserService" 
    		cardinality="0..1" 
-   		interface="com.zizibujuan.drip.server.service.UserService" 
+   		interface="com.zizibujuan.useradmin.server.service.UserService" 
    		name="userService" 
    		policy="dynamic"/>
    		
    <service>
-      <provide interface="com.zizibujuan.drip.server.service.UserRelationService"/>
+      <provide interface="com.zizibujuan.useradmin.server.service.UserRelationService"/>
    </service>
 </scr:component>

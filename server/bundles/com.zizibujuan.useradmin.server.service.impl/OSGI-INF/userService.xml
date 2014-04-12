@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" 
-	name="com.zizibujuan.drip.server.service.impl.userServiceImpl">
-   <implementation class="com.zizibujuan.drip.server.service.impl.UserServiceImpl"/>
+	name="com.zizibujuan.useradmin.server.service.impl.userServiceImpl">
+   <implementation class="com.zizibujuan.useradmin.server.service.impl.UserServiceImpl"/>
    <reference 
    		bind="setUserDao" 
    		unbind="unsetUserDao" 
    		cardinality="0..1" 
-   		interface="com.zizibujuan.drip.server.dao.UserDao" 
+   		interface="com.zizibujuan.useradmin.server.dao.UserDao" 
    		name="userDao" 
    		policy="dynamic"/>
    		
@@ -14,7 +14,7 @@
    		bind="setEmailService" 
    		unbind="unsetEmailService" 
    		cardinality="0..1" 
-   		interface="com.zizibujuan.drip.server.service.EmailService" 
+   		interface="com.zizibujuan.useradmin.server.service.EmailService" 
    		name="emailService" 
    		policy="dynamic"/>
    		
@@ -22,7 +22,7 @@
 		bind="setUserAttributesDao" 
 		unbind="unsetUserAttributesDao" 
 		cardinality="0..1" 
-		interface="com.zizibujuan.drip.server.dao.UserAttributesDao" 
+		interface="com.zizibujuan.useradmin.server.dao.UserAttributesDao" 
 		name="userAttributesDao" 
 		policy="dynamic"/>
   
@@ -30,7 +30,7 @@
    		bind="setUserAvatarDao" 
    		unbind="unsetUserAvatarDao" 
    		cardinality="0..1" 
-   		interface="com.zizibujuan.drip.server.dao.UserAvatarDao" 
+   		interface="com.zizibujuan.useradmin.server.dao.UserAvatarDao" 
    		name="userAvatarDao" 
    		policy="dynamic"/>
    		
@@ -38,7 +38,7 @@
    		bind="setConnectUserDao" 
    		unbind="unsetConnectUserDao" 
    		cardinality="0..1" 
-   		interface="com.zizibujuan.drip.server.dao.ConnectUserDao" 
+   		interface="com.zizibujuan.useradmin.server.dao.ConnectUserDao" 
    		name="connectUserDao" 
    		policy="dynamic"/>
    		
@@ -46,7 +46,7 @@
    		bind="setUserBindDao" 
    		unbind="unsetUserBindDao" 
    		cardinality="0..1" 
-   		interface="com.zizibujuan.drip.server.dao.UserBindDao" 
+   		interface="com.zizibujuan.useradmin.server.dao.UserBindDao" 
    		name="userBindDao" 
    		policy="dynamic"/>
    		
@@ -54,7 +54,7 @@
    		bind="setUserStatisticsDao" 
    		unbind="unsetUserStatisticsDao" 
    		cardinality="0..1" 
-   		interface="com.zizibujuan.drip.server.dao.UserStatisticsDao" 
+   		interface="com.zizibujuan.useradmin.server.dao.UserStatisticsDao" 
    		name="userStatisticsDao" 
    		policy="dynamic"/>
    		
@@ -62,11 +62,11 @@
    		bind="setApplicationPropertyService" 
    		unbind="unsetApplicationPropertyService" 
    		cardinality="0..1" 
-   		interface="com.zizibujuan.drip.server.service.ApplicationPropertyService" 
+   		interface="com.zizibujuan.cm.server.service.ApplicationPropertyService" 
    		name="applicationPropertyService" 
    		policy="dynamic"/>	
    		
    <service>
-      <provide interface="com.zizibujuan.drip.server.service.UserService"/>
+      <provide interface="com.zizibujuan.useradmin.server.service.UserService"/>
    </service>
 </scr:component>

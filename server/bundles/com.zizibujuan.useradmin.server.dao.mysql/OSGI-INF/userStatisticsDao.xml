@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" 
-	name="com.zizibujuan.drip.server.dao.mysql.userStatisticsDao">
-   <implementation class="com.zizibujuan.drip.server.dao.mysql.UserStatisticsDaoImpl"/>
+	name="com.zizibujuan.useradmin.server.dao.mysql.userStatisticsDao">
+   <implementation class="com.zizibujuan.useradmin.server.dao.mysql.UserStatisticsDaoImpl"/>
    <service>
-      <provide interface="com.zizibujuan.drip.server.dao.UserStatisticsDao"/>
+      <provide interface="com.zizibujuan.useradmin.server.dao.UserStatisticsDao"/>
    </service>
 </scr:component>
