@@ -7,6 +7,7 @@ Bundle-Activator: com.zizibujuan.useradmin.server.servlets.Activator
 Bundle-Vendor: zizibujuan.com
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Import-Package: com.zizibujuan.cm.server.service,
+ com.zizibujuan.cm.server.servlets,
  com.zizibujuan.drip.server.util,
  com.zizibujuan.drip.server.util.constant,
  com.zizibujuan.drip.server.util.servlet,

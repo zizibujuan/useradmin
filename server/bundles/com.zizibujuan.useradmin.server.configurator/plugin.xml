@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+    <extension
+         point="org.eclipse.equinox.http.registry.servlets">
+         
+      <servlet 
+      		alias="/settings"
+      		class="com.zizibujuan.useradmin.server.servlets.UserSettingServlet">
+      </servlet> 
+      
+      <servlet
+            alias="/signup_check"
+            class="com.zizibujuan.useradmin.server.servlets.SignUpCheckServlet">
+      </servlet>
+      
+      <servlet
+            alias="/users"
+            class="com.zizibujuan.useradmin.server.servlets.UserServlet">
+            
+      </servlet>
+            <servlet
+            alias="/login"
+            class="com.zizibujuan.useradmin.server.servlets.LoginServlet">
+      </servlet>
+      
+      <servlet
+            alias="/logout"
+            class="com.zizibujuan.useradmin.server.servlets.LogoutServlet">
+      </servlet>
+      
+    </extension>
+</plugin>

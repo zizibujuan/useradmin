@@ -25,6 +25,7 @@ import com.renren.api.service.ImageSize;
 import com.renren.api.service.Sex;
 import com.renren.api.service.User;
 import com.zizibujuan.cm.server.service.ApplicationPropertyService;
+import com.zizibujuan.cm.server.servlets.CMServiceHolder;
 import com.zizibujuan.useradmin.server.model.Avatar;
 import com.zizibujuan.useradmin.server.model.UserBindInfo;
 import com.zizibujuan.useradmin.server.model.UserInfo;
@@ -47,7 +48,7 @@ public class RenrenUserConnect extends UserConnect {
 	@Override
 	protected void toLoginPage(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		// TODO:改为一次数据库请求，获取一组参数
-		ApplicationPropertyService applicationPropertyService = UserAdminServiceHolder.getDefault().getApplicationPropertyService();
+		ApplicationPropertyService applicationPropertyService = CMServiceHolder.getDefault().getApplicationPropertyService();
 		String appId = applicationPropertyService.getForString(OAuthConstants.KEY_RENREN_APP_ID);
 		String hrefTemplate = applicationPropertyService.getForString(OAuthConstants.KEY_RENREN_LOGIN_PAGE_URL_TMPL);
 		String redirectUri = applicationPropertyService.getForString(OAuthConstants.KEY_RENREN_REDIRECT_URL);
@@ -62,7 +63,7 @@ public class RenrenUserConnect extends UserConnect {
 			String code) throws IOException {
 
 		UserService userService = UserAdminServiceHolder.getDefault().getUserService();
-		ApplicationPropertyService applicationPropertyService = UserAdminServiceHolder.getDefault().getApplicationPropertyService();
+		ApplicationPropertyService applicationPropertyService = CMServiceHolder.getDefault().getApplicationPropertyService();
 		UserBindService userBindService = UserAdminServiceHolder.getDefault().getUserBindService();
 		
 		String redirectUri = applicationPropertyService.getForString(OAuthConstants.KEY_RENREN_REDIRECT_URL);
@@ -191,7 +192,7 @@ public class RenrenUserConnect extends UserConnect {
 			value = "中国";
 		}
 		
-		ApplicationPropertyService applicationPropertyService = UserAdminServiceHolder.getDefault().getApplicationPropertyService();
+		ApplicationPropertyService applicationPropertyService = CMServiceHolder.getDefault().getApplicationPropertyService();
 		return applicationPropertyService.getCityCodeByValue(value);
 	}
 	

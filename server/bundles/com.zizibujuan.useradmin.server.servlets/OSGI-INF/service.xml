@@ -15,16 +15,6 @@
 		interface="com.zizibujuan.useradmin.server.service.UserService" 
 		name="userService" 
 		policy="dynamic" />
-
-
-		
-	<reference 
-		bind="setApplicationPropertyService" 
-		unbind="unsetApplicationPropertyService" 
-		cardinality="0..1" 
-		interface="com.zizibujuan.cm.server.service.ApplicationPropertyService" 
-		name="applicationPropertyService" 
-		policy="dynamic" />
 		
 	<reference 
 		bind="setUserBindService" 
