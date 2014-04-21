@@ -9,14 +9,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.validator.routines.EmailValidator;
 import org.eclipse.core.runtime.IPath;
 
-
-
-
 import com.zizibujuan.drip.server.util.servlet.BaseServlet;
 import com.zizibujuan.drip.server.util.servlet.RequestUtil;
 import com.zizibujuan.drip.server.util.servlet.ResponseUtil;
 import com.zizibujuan.drip.server.util.servlet.UserSession;
-import com.zizibujuan.drip.server.util.servlet.Validator;
+import com.zizibujuan.drip.server.util.servlet.validate.Validator;
 import com.zizibujuan.useradmin.server.model.UserInfo;
 import com.zizibujuan.useradmin.server.service.UserService;
 
