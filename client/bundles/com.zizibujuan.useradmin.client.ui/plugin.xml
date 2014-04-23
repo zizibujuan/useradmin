@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+	<extension
+         point="org.eclipse.equinox.http.registry.httpcontexts">
+         <httpcontext
+            id="com.zizibujuan.useradmin.client.httpcontext.ui">
+	         <resource-mapping
+	               bundle="com.zizibujuan.useradmin.client.ui"
+	               path="/static/useradmin">
+	         </resource-mapping>
+         </httpcontext>
+    </extension>
+	<extension
+         point="org.eclipse.equinox.http.registry.resources">
+      <resource
+            alias="/useradmin"
+            httpcontextId="com.zizibujuan.useradmin.client.httpcontext.ui">
+      </resource>
+    </extension>
+</plugin>
