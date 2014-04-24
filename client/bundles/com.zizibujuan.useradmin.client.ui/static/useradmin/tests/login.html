@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+@import url('/useradmin/resources/Register.css');
+</style>
+
+<script type="text/javascript" 
+	data-dojo-config="
+		async:true,
+		parseOnLoad:false,
+		isDebug:true" 
+	src="/dojo/dojo.js"></script>
+	
+<script type="text/javascript">
+	require(["useradmin/mixLogin/Login", "dojo/domReady!"], function(Login){
+		var login = new Login();
+		login.placeAt("login");
+		login.startup();
+	});
+</script>
+</head>
+<body>
+<div id="login">
+
+</div>
+</body>
+</html>

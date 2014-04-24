@@ -17,10 +17,10 @@
       
       <servlet
             alias="/users"
-            class="com.zizibujuan.useradmin.server.servlets.UserServlet">
-            
+            class="com.zizibujuan.useradmin.server.servlets.UserServlet"> 
       </servlet>
-            <servlet
+      
+      <servlet
             alias="/login"
             class="com.zizibujuan.useradmin.server.servlets.LoginServlet">
       </servlet>
