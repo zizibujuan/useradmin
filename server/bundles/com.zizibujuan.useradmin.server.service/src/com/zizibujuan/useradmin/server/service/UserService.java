@@ -83,6 +83,8 @@ public interface UserService {
 	 * 根据用户标识，获取用户信息。注意包含用户的一些不允许公开的信息，如邮箱等。
 	 * 即会有一些隐私数据，如果需要公开显示用户信息，则请使用{@link #getPublicInfo(Long)}
 	 * 
+	 * FIXME:待确认是否添加缓存
+	 * 
 	 * @param userId
 	 * @return 用户信息，包含隐私数据
 	 */
