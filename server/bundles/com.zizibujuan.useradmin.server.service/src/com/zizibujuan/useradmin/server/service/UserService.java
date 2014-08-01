@@ -143,6 +143,8 @@ public interface UserService {
 	 */
 	UserInfo login(Long userId);
 	
+	UserInfo login(Long userId, String accessToken, long tokenExpireIn);
+	
 	/**
 	 * 获取可以公开的用户信息，这些信息会在其他用户的页面上显示，剔除掉了用户的隐私信息。
 	 * 因为用户信息存储在多个表中，这里将一些基本的可公开的用户信息组合在一起。<br/>

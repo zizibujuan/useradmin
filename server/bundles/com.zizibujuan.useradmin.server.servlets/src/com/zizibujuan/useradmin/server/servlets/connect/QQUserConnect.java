@@ -47,6 +47,9 @@ public class QQUserConnect extends UserConnect {
 	protected void login(HttpServletRequest req, HttpServletResponse resp,
 			String code) throws IOException {
 		try {
+			// 从本地获取访问标识与失效时间，如果访问标识有效，则直接使用token访问，否则重新请求token
+			
+			
 			AccessToken accessTokenObj = new Oauth().getAccessTokenByRequest(req);
 			String accessToken = null;
 			String openID = null;
@@ -59,6 +62,7 @@ public class QQUserConnect extends UserConnect {
 			}
 		
 			tokenExpireIn = accessTokenObj.getExpireIn();
+			
 			req.getSession().setAttribute("qq_access_token", accessToken);
 			req.getSession().setAttribute("qq_token_expirein", tokenExpireIn);
 			
@@ -106,7 +110,7 @@ public class QQUserConnect extends UserConnect {
 				dripUserId = userBindInfo.getUserId();
 			}
 			
-			internLogin(req, resp, dripUserId);
+			internLogin(req, resp, dripUserId, qzoneUserInfoBean.getNickname(), accessToken, tokenExpireIn);
 		} catch (QQConnectException e) {
 			e.printStackTrace();
 		}

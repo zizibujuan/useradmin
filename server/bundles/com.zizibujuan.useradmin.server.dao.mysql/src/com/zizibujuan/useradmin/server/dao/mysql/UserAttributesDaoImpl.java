@@ -39,9 +39,15 @@ public class UserAttributesDaoImpl extends AbstractDao implements UserAttributes
 			+ "WHERE "
 			+ "USER_ID= %s AND "
 			+ "ATTR_NAME='%s'";
-	private static final String SQL_UPDATE_USER_LOGIN_TOKEN = "UPDATE DRIP_USER_INFO SET ACCESS_TOKEN=? WHERE DBID=?";
+	private static final String SQL_UPDATE_USER_LOGIN_TOKEN = "UPDATE "
+			+ "DRIP_USER_INFO "
+			+ "SET "
+			+ "ACCESS_TOKEN=?,"
+			+ "EXPIRES_TIME=? "
+			+ "WHERE "
+			+ "DBID=?";
 	@Override
-	public void updateLoginState(Long userId, String token) {
+	public void updateLoginState(Long userId, String token, long tokenExpireIn) {
 		Connection con = null;
 		Statement pst = null;
 		try{
@@ -54,7 +60,7 @@ public class UserAttributesDaoImpl extends AbstractDao implements UserAttributes
 			pst.addBatch(loginCount);
 			pst.executeBatch();
 			if(token != null){
-				DatabaseUtil.update(con, SQL_UPDATE_USER_LOGIN_TOKEN, token, userId);
+				DatabaseUtil.update(con, SQL_UPDATE_USER_LOGIN_TOKEN, token, tokenExpireIn, userId);
 			}
 			con.commit();
 		}catch(SQLException e){

@@ -99,7 +99,7 @@ public class UserServiceImpl implements UserService {
 		setAvatars(userInfo);
 		// 更新用户登录状态
 		String token = UUID.randomUUID().toString().replace("-", "");
-		userAttributesDao.updateLoginState(userInfo.getId(),token);
+		userAttributesDao.updateLoginState(userInfo.getId(),token, -1); // -1代表永不过期
 		userInfo.setAccessToken(token);
 		return userInfo;
 	}
@@ -158,9 +158,21 @@ public class UserServiceImpl implements UserService {
 		}
 		// 添加用户头像
 		setAvatars(userInfo);
-		userAttributesDao.updateLoginState(userId, null); // 将token放在这个方法中不合适
+		userAttributesDao.updateLoginState(userId, null, 0); // 将token放在这个方法中不合适
 		return userInfo;
 	}	
+	
+	@Override
+	public UserInfo login(Long userId, String accessToken, long tokenExprireIn) {
+		UserInfo userInfo = userDao.getById(userId);
+		if(userInfo == null){
+			return null;
+		}
+		// 添加用户头像
+		setAvatars(userInfo);
+		userAttributesDao.updateLoginState(userId, accessToken, tokenExprireIn); // 将token放在这个方法中不合适
+		return userInfo;
+	}
 	
 	// 获取基本信息
 	// 获取统计信息

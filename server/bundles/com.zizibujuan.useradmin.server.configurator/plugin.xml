@@ -31,4 +31,15 @@
       </servlet>
       
     </extension>
+    
+    <extension
+         point="org.eclipse.equinox.http.registry.filters">
+      
+		<!-- 如果用户没有登录，则尝试自动登录 -->
+      <filter
+            alias="/"
+            class="com.zizibujuan.useradmin.server.configurator.AutoLoginFilter">
+      </filter>
+      
+      </extension>
 </plugin>
