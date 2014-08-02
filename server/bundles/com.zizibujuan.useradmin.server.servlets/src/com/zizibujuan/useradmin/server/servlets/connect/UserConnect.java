@@ -69,22 +69,21 @@ public abstract class UserConnect {
 			HttpServletResponse resp, 
 			Long dripUserId,
 			String loginName,
-			String accessToken,
-			long tokenExpireIn) {
+			String localAccessToken,
+			String oauthAccessToken,
+			long oauthTokenExpireIn) {
 		// FIXME:注意，暂时不支持第三方用户自动登录
 		// 是不是应该在每次登录时，都记录下token和过期时间呢?
-		com.zizibujuan.useradmin.server.model.UserInfo dripUserInfo = userService.login(dripUserId, accessToken, tokenExpireIn);
+		com.zizibujuan.useradmin.server.model.UserInfo dripUserInfo = userService.login(dripUserId, localAccessToken, oauthAccessToken, oauthTokenExpireIn);
 		UserSession.setUser(req, dripUserInfo);
 		// 第三方网站不在loginName中缓存昵称
 		CookieUtil.set(resp, CookieConstants.LOGGED_IN, "1", null, -1);
 		// 防止同一台电脑先使用drip用户登录，然后使用qq用户登录，要删除本网站的token
 		// 这样就不会使用其他人的帐号自动登录
 		// 同时也可以设置第三方网站的token，这样可以使用这些token自动登录
-		CookieUtil.remove(req, resp, CookieConstants.ZZBJ_USER_TOKEN);
-		CookieUtil.remove(req, resp, CookieConstants.LOGIN_NAME);
 		
 		CookieUtil.set(resp, CookieConstants.LOGIN_NAME, loginName, null, 365*24*60*60/*一年有效*/);
 		CookieUtil.set(resp, CookieConstants.LOGGED_IN, "1", null, -1);
-		CookieUtil.set(resp, CookieConstants.ZZBJ_USER_TOKEN, accessToken, null, -1);
+		CookieUtil.set(resp, CookieConstants.ZZBJ_USER_TOKEN, localAccessToken, null, -1);
 	}
 }
