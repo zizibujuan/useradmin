@@ -91,12 +91,12 @@ public interface UserService {
 	UserInfo getById(Long userId);
 	
 	/**
-	 * 根据token获取用户信息
+	 * 根据token获取用户信息, 这里使用要判断token是否过期。
 	 * 
-	 * @param token
+	 * @param localAccessToken 本网站的用户访问标识
 	 * @return 用户信息
 	 */
-	 UserInfo getByToken(String token);
+	 UserInfo getByToken(String localAccessToken);
 	
 	/**
 	 * 根据登录名获取用户的基本信息。
@@ -143,7 +143,7 @@ public interface UserService {
 	 */
 	UserInfo login(Long userId);
 	
-	UserInfo login(Long userId, String accessToken, long tokenExpireIn);
+	UserInfo login(Long userId, String localAccessToken, String oauthAccessToken, long oauthTokenExpireIn);
 	
 	/**
 	 * 获取可以公开的用户信息，这些信息会在其他用户的页面上显示，剔除掉了用户的隐私信息。

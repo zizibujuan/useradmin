@@ -60,21 +60,17 @@ public class AutoLoginFilter implements Filter{
 		// 如果cookie中有logged_in和token，则执行登录操作
 		Cookie loggedInCookie = CookieUtil.get(httpRequest, CookieConstants.LOGGED_IN);
 		// TODO:用户每次登录，都自动分配一个token
-		if(loggedInCookie != null){
-			String loggedInValue = loggedInCookie.getValue();
-			if(loggedInValue.equals("1")){
-				Cookie tokenCookie = CookieUtil.get(httpRequest, CookieConstants.ZZBJ_USER_TOKEN);
-				if(tokenCookie != null){
-					String token = tokenCookie.getValue();
-					// 自动登录
-					UserInfo userInfo = userService.getByToken(token);
-					if(userInfo == null){
-						logger.error("自动登录失败，这个时候页面上会显示LoggedInHeader，出现不一致的情况");
-					}else{
-						UserSession.setUser(httpRequest, userInfo);
-					}
+		if(loggedInCookie != null && ("1").equals(loggedInCookie.getValue())){
+			Cookie tokenCookie = CookieUtil.get(httpRequest, CookieConstants.ZZBJ_USER_TOKEN);
+			if(tokenCookie != null){
+				String localAccessToken = tokenCookie.getValue();
+				// 自动登录
+				UserInfo userInfo = userService.getByToken(localAccessToken);
+				if(userInfo == null){
+					logger.error("自动登录失败，这个时候页面上会显示LoggedInHeader，出现不一致的情况");
+				}else{
+					UserSession.setUser(httpRequest, userInfo);
 				}
-				
 			}
 		}
 	}

@@ -88,12 +88,12 @@ public interface UserDao {
 	UserInfo getByConfirmKey(String confirmKey);
 	
 	/**
-	 * 根据token获取用户信息
+	 * 根据token获取用户信息, 这里使用要判断token是否过期。
 	 * 
-	 * @param token
+	 * @param localAccessToken
 	 * @return 用户信息
 	 */
-	UserInfo getByToken(String token);
+	UserInfo getByToken(String localAccessToken);
 	
 	/**
 	 * 根据用户标识，获取用户信息。注意包含用户的一些不允许公开的信息，如邮箱等。

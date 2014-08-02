@@ -42,12 +42,13 @@ public class UserAttributesDaoImpl extends AbstractDao implements UserAttributes
 	private static final String SQL_UPDATE_USER_LOGIN_TOKEN = "UPDATE "
 			+ "DRIP_USER_INFO "
 			+ "SET "
-			+ "ACCESS_TOKEN=?,"
-			+ "EXPIRES_TIME=? "
+			+ "LOCAL_ACCESS_TOKEN=?,"
+			+ "OAUTH_ACCESS_TOKEN=?,"
+			+ "ACCESS_TOKEN_EXPIRE_TIME=DATE_ADD(now(), INTERVAL ? SECOND) "
 			+ "WHERE "
 			+ "DBID=?";
 	@Override
-	public void updateLoginState(Long userId, String token, long tokenExpireIn) {
+	public void updateLoginState(Long userId, String localAccessToken, String oauthAccessToken, long oauthTokenExpireIn) {
 		Connection con = null;
 		Statement pst = null;
 		try{
@@ -59,9 +60,9 @@ public class UserAttributesDaoImpl extends AbstractDao implements UserAttributes
 			String loginCount = String.format(SQL_UPDATE_LOGIN_COUNT,userId,ApplicationPropertyKey.LOGIN_COUNT);
 			pst.addBatch(loginCount);
 			pst.executeBatch();
-			if(token != null){
-				DatabaseUtil.update(con, SQL_UPDATE_USER_LOGIN_TOKEN, token, tokenExpireIn, userId);
-			}
+			
+			DatabaseUtil.update(con, SQL_UPDATE_USER_LOGIN_TOKEN, localAccessToken, oauthAccessToken, oauthTokenExpireIn, userId);
+			
 			con.commit();
 		}catch(SQLException e){
 			DatabaseUtil.safeRollback(con);

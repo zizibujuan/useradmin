@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.zizibujuan.cm.server.service.ApplicationPropertyService;
+import com.zizibujuan.drip.server.util.IdGenerator;
 import com.zizibujuan.useradmin.server.dao.ConnectUserDao;
 import com.zizibujuan.useradmin.server.dao.UserAttributesDao;
 import com.zizibujuan.useradmin.server.dao.UserAvatarDao;
@@ -98,9 +99,9 @@ public class UserServiceImpl implements UserService {
 		// 添加用户头像
 		setAvatars(userInfo);
 		// 更新用户登录状态
-		String token = UUID.randomUUID().toString().replace("-", "");
-		userAttributesDao.updateLoginState(userInfo.getId(),token, -1); // -1代表永不过期
-		userInfo.setAccessToken(token);
+		String localAccessToken = IdGenerator.uuid();
+		userAttributesDao.updateLoginState(userInfo.getId(),localAccessToken,null, -1); // -1代表永不过期
+		userInfo.setAccessToken(localAccessToken);
 		return userInfo;
 	}
 	
@@ -146,8 +147,8 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public UserInfo getByToken(String token) {
-		return userDao.getByToken(token);
+	public UserInfo getByToken(String localAccessToken) {
+		return userDao.getByToken(localAccessToken);
 	}
 	
 	@Override
@@ -158,19 +159,19 @@ public class UserServiceImpl implements UserService {
 		}
 		// 添加用户头像
 		setAvatars(userInfo);
-		userAttributesDao.updateLoginState(userId, null, 0); // 将token放在这个方法中不合适
+		userAttributesDao.updateLoginState(userId, null, null, 0); // 将token放在这个方法中不合适
 		return userInfo;
 	}	
 	
 	@Override
-	public UserInfo login(Long userId, String accessToken, long tokenExprireIn) {
+	public UserInfo login(Long userId, String localAccessToken, String oauthAccessToken, long oauthTokenExprireIn) {
 		UserInfo userInfo = userDao.getById(userId);
 		if(userInfo == null){
 			return null;
 		}
 		// 添加用户头像
 		setAvatars(userInfo);
-		userAttributesDao.updateLoginState(userId, accessToken, tokenExprireIn); // 将token放在这个方法中不合适
+		userAttributesDao.updateLoginState(userId, localAccessToken, oauthAccessToken, oauthTokenExprireIn); // 将token放在这个方法中不合适
 		return userInfo;
 	}
 	

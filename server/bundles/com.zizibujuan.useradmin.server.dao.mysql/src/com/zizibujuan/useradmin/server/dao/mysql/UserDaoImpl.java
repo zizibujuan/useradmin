@@ -166,10 +166,11 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 	
 	private static final String SQL_GET_USER_INFO_BY_TOKEN = SQL_GET_USER_INFO
 			+ "WHERE "
-			+ "ACCESS_TOKEN=?";
+			+ "LOCAL_ACCESS_TOKEN=? AND "
+			+ "ACCESS_TOKEN_EXPIRE_TIME > now()"; // 使用的是数据库时间
 	@Override
-	public UserInfo getByToken(String token) {
-		return DatabaseUtil.queryForObject(getDataSource(), SQL_GET_USER_INFO_BY_TOKEN, new UserInfoRowMapper(), token);
+	public UserInfo getByToken(String localAccessToken) {
+		return DatabaseUtil.queryForObject(getDataSource(), SQL_GET_USER_INFO_BY_TOKEN, new UserInfoRowMapper(), localAccessToken);
 	}
 	
 	private static final String SQL_UPDATE_ACTIVE_USER = "UPDATE DRIP_USER_INFO "

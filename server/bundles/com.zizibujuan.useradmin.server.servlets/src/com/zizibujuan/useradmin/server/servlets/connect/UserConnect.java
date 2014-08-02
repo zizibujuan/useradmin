@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.zizibujuan.useradmin.server.model.Avatar;
 import com.zizibujuan.useradmin.server.service.UserService;
 import com.zizibujuan.useradmin.server.servlets.UserAdminServiceHolder;
+import com.zizibujuan.drip.server.util.IdGenerator;
 import com.zizibujuan.drip.server.util.constant.CookieConstants;
 import com.zizibujuan.drip.server.util.servlet.CookieUtil;
 import com.zizibujuan.drip.server.util.servlet.UserSession;
@@ -69,11 +70,11 @@ public abstract class UserConnect {
 			HttpServletResponse resp, 
 			Long dripUserId,
 			String loginName,
-			String localAccessToken,
 			String oauthAccessToken,
 			long oauthTokenExpireIn) {
 		// FIXME:注意，暂时不支持第三方用户自动登录
 		// 是不是应该在每次登录时，都记录下token和过期时间呢?
+		String localAccessToken = IdGenerator.uuid();
 		com.zizibujuan.useradmin.server.model.UserInfo dripUserInfo = userService.login(dripUserId, localAccessToken, oauthAccessToken, oauthTokenExpireIn);
 		UserSession.setUser(req, dripUserInfo);
 		// 第三方网站不在loginName中缓存昵称
