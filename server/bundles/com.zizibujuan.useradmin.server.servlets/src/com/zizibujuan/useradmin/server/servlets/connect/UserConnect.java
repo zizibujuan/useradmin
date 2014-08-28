@@ -6,13 +6,13 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.zizibujuan.useradmin.server.model.Avatar;
-import com.zizibujuan.useradmin.server.service.UserService;
-import com.zizibujuan.useradmin.server.servlets.UserAdminServiceHolder;
 import com.zizibujuan.drip.server.util.IdGenerator;
 import com.zizibujuan.drip.server.util.constant.CookieConstants;
 import com.zizibujuan.drip.server.util.servlet.CookieUtil;
 import com.zizibujuan.drip.server.util.servlet.UserSession;
+import com.zizibujuan.useradmin.server.model.Avatar;
+import com.zizibujuan.useradmin.server.service.UserService;
+import com.zizibujuan.useradmin.server.servlets.UserAdminServiceHolder;
 
 /**
  * 使用第三方网站帐号登录的抽象类
