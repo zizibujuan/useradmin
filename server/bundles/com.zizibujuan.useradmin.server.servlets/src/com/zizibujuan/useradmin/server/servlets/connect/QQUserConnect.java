@@ -46,10 +46,9 @@ public class QQUserConnect extends UserConnect {
 	@Override
 	protected void login(HttpServletRequest req, HttpServletResponse resp,
 			String code) throws IOException {
+		boolean needComplete = false;
 		try {
 			// 从本地获取访问标识与失效时间，如果访问标识有效，则直接使用token访问，否则重新请求token
-			
-			
 			AccessToken accessTokenObj = new Oauth().getAccessTokenByRequest(req);
 			String accessToken = null;
 			String openID = null;
@@ -79,6 +78,7 @@ public class QQUserConnect extends UserConnect {
 			Long dripUserId = null;
 			// 判断第三方帐号是否与本网站帐号建立关联，如果没有，则先建立关联
 			UserBindInfo userBindInfo = userBindService.get(OAuthConstants.QQ, openID);
+			
 			if(userBindInfo == null){
 				userBindInfo = new UserBindInfo();
 				userBindInfo.setOpenId(openID);
@@ -110,11 +110,12 @@ public class QQUserConnect extends UserConnect {
 				dripUserId = userBindInfo.getUserId();
 			}
 			
-			internLogin(req, resp, dripUserId, qzoneUserInfoBean.getNickname(), accessToken, tokenExpireIn);
+			needComplete = internLogin(req, resp, dripUserId, qzoneUserInfoBean.getNickname(), accessToken, tokenExpireIn);
+			
 		} catch (QQConnectException e) {
 			e.printStackTrace();
 		}
-		resp.sendRedirect("/");
+		resp.sendRedirect(needComplete ? "/completeUserInfo" : "/");
 	}
 	
 }

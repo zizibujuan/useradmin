@@ -66,7 +66,17 @@ public abstract class UserConnect {
 		CookieUtil.remove(req, resp, CookieConstants.LOGIN_NAME);
 	}
 	
-	protected void internLogin(HttpServletRequest req, 
+	/**
+	 * 
+	 * @param req
+	 * @param resp
+	 * @param dripUserId
+	 * @param loginName
+	 * @param oauthAccessToken
+	 * @param oauthTokenExpireIn
+	 * @return 如果为true，则需要完善用户邮箱等信息；否则不需要
+	 */
+	protected boolean internLogin(HttpServletRequest req, 
 			HttpServletResponse resp, 
 			Long dripUserId,
 			String loginName,
@@ -86,5 +96,9 @@ public abstract class UserConnect {
 		CookieUtil.set(resp, CookieConstants.LOGIN_NAME, loginName, null, 365*24*60*60/*一年有效*/);
 		CookieUtil.set(resp, CookieConstants.LOGGED_IN, "1", null, -1);
 		CookieUtil.set(resp, CookieConstants.ZZBJ_USER_TOKEN, localAccessToken, null, -1);
+		if(dripUserInfo.getEmail() == null || dripUserInfo.getEmail().trim().isEmpty()){
+			return true;
+		}
+		return false;
 	}
 }

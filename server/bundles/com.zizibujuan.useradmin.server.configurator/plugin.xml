@@ -30,6 +30,13 @@
             class="com.zizibujuan.useradmin.server.servlets.LogoutServlet">
       </servlet>
       
+      <servlet
+            alias="/completeUserInfo"
+            class="com.zizibujuan.useradmin.server.servlets.CompleteUserInfoServlet">
+      </servlet>
+      
+      
+      
     </extension>
     
     <extension
