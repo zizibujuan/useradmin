@@ -24,6 +24,15 @@
 	 txtEmail.on("input", function(e){
 		validateForm();
 	 });
+	 
+	 btnSave.on("click", function(e){
+		 var data = getFormData();
+		 $.post("completeUserInfo", data).done(function(data){
+			 window.location.href = "/";
+		 }).fail(function(){
+			 
+		 });
+	 });
 	
 	
 	function validateForm(){
