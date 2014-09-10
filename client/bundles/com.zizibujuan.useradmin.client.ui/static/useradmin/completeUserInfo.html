@@ -28,7 +28,8 @@
 	 btnSave.on("click", function(e){
 		 var data = getFormData();
 		 $.post("completeUserInfo", data).done(function(data){
-			 window.location.href = "/";
+			 // 跳到目标页面，目前就这一个目标页面，所以硬编码
+			 window.location.href = "/files/new";
 		 }).fail(function(){
 			 
 		 });

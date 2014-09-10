@@ -323,6 +323,18 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 	public void update(UserInfo userInfo) {
 		DatabaseUtil.update(getDataSource(), SQL_UPDATE_USER, userInfo.getNickName(), userInfo.getEmail(), userInfo.getSex(), userInfo.getId());
 	}
+	
+	// TODO: update(UserInfo)这个方法与completeUserInfo功能上大致相同，看能不能合并。
+	private static final String SQL_UPDATE_USER_NICKNAME_EMAIL = "UPDATE "
+			+ "DRIP_USER_INFO "
+			+ "SET "
+			+ "NICK_NAME=?, "
+			+ "EMAIL=? "
+			+ "WHERE DBID=?";
+	@Override
+	public void completeUserInfo(long userId, String nickName, String email) {
+		DatabaseUtil.update(getDataSource(), SQL_UPDATE_USER_NICKNAME_EMAIL, nickName, email, userId);
+	}
 
 	
 	
@@ -449,5 +461,5 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 			this.userStatisticsDao = null;
 		}
 	}
-	
+
 }

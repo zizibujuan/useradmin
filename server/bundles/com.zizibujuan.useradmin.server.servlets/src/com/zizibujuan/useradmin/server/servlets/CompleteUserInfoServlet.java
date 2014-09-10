@@ -7,11 +7,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.validator.routines.EmailValidator;
 import org.eclipse.core.runtime.IPath;
 
 import com.zizibujuan.drip.server.util.servlet.BaseServlet;
 import com.zizibujuan.drip.server.util.servlet.RequestUtil;
+import com.zizibujuan.drip.server.util.servlet.ResponseUtil;
 import com.zizibujuan.drip.server.util.servlet.UserSession;
+import com.zizibujuan.drip.server.util.servlet.validate.Validator;
 import com.zizibujuan.useradmin.server.model.UserInfo;
 import com.zizibujuan.useradmin.server.service.UserService;
 
@@ -51,17 +54,40 @@ public class CompleteUserInfoServlet extends BaseServlet{
 		if(path.segmentCount() == 0){
 			long userId = ((UserInfo)UserSession.getUser(req)).getId();
 			Map<String, Object> newInfo = RequestUtil.fromJsonObject(req);
-			// 校验
-			if(newInfo == null || newInfo.isEmpty()){
-				
+			Validator validator = new Validator();
+			this.validate(validator, newInfo);
+			if(validator.hasFieldErrors()){
+				ResponseUtil.toJSON(req, resp, validator.getFieldErrors(), HttpServletResponse.SC_PRECONDITION_FAILED);
 				return;
 			}
+			
 			String nickName = newInfo.get("nickName").toString();
 			String email = newInfo.get("email").toString();
-			userService.completeUserInfo(userId, );
+			userService.completeUserInfo(userId, nickName, email);
 			return;
 		}
 		super.doPost(req, resp);
+	}
+	
+	private void validate(Validator validator, Map<String, Object> newUserInfo){
+		// 校验
+		if(newUserInfo == null || newUserInfo.isEmpty()){
+			validator.addFieldError("nickName", "用户名不能为空");
+			validator.addFieldError("email", "邮箱不能为空");
+			return;
+		}
+		Object nickName = newUserInfo.get("nickName");
+		if(nickName == null || nickName.toString().trim().isEmpty()){
+			validator.addFieldError("nickName", "用户名不能为空");
+		}
+		
+		Object email = newUserInfo.get("email");
+		if(email == null || email.toString().trim().isEmpty()){
+			validator.addFieldError("email", "邮箱不能为空");
+		}else if(!EmailValidator.getInstance().isValid(email.toString().trim())){
+			validator.addFieldError("email", "邮箱无效");
+		}
+		
 	}
 	
 }

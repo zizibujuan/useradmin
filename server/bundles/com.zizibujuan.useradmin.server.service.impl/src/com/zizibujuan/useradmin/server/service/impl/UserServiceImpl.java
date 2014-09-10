@@ -203,6 +203,10 @@ public class UserServiceImpl implements UserService {
 		userDao.update(userInfo);
 	}
 
+	@Override
+	public void completeUserInfo(long userId, String nickName, String email) {
+		userDao.completeUserInfo(userId, nickName, email);
+	}
 	
 	
 	

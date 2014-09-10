@@ -193,7 +193,14 @@ public interface UserService {
 	 */
 	void update(UserInfo userInfo);
 	
-	
+	/**
+	 * 完善用户信息，主要用于修改用户的昵称和邮箱地址
+	 * 
+	 * @param userId 用户标识
+	 * @param nickName 用户昵称
+	 * @param email 邮箱地址
+	 */
+	void completeUserInfo(long userId, String nickName, String email);
 	
 	
 	
@@ -254,5 +261,7 @@ public interface UserService {
 	 * </pre>
 	 */
 	UserStatistics getUserStatistics(Long userId);
+
+
 
 }
