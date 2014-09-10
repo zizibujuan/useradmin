@@ -87,8 +87,8 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 			+ "CONFIRM_KEY,"
 			+ "ACTIVITY,"
 			+ "CREATE_TIME,"
-			+ "ACCESS_TOKEN,"
-			+ "EXPIRES_TIME) " 
+			+ "OAUTH_ACCESS_TOKEN,"
+			+ "ACCESS_TOKEN_EXPIRE_TIME) " 
 			+ "VALUES "
 			+ "(?, ?, ?, ?, ?, ?, ?, now(),?,?)";
 	private Long add(Connection con, final UserInfo userInfo) throws SQLException{
@@ -104,9 +104,9 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 				ps.setBoolean(7, userInfo.isActive());
 				ps.setString(8, userInfo.getAccessToken());
 				if(userInfo.getExpiresTime() == null){
-					ps.setNull(9, Types.NUMERIC);
+					ps.setNull(9, Types.TIMESTAMP);
 				}else{
-					ps.setLong(9, userInfo.getExpiresTime());
+					ps.setTimestamp(9, new java.sql.Timestamp(userInfo.getExpiresTime().getTime()));
 				}
 				
 			}

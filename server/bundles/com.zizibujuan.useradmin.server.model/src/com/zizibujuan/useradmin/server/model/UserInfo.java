@@ -19,7 +19,7 @@ public class UserInfo {
 	private String introduce;
 	private String confirmKey;
 	private String accessToken;
-	private Long expiresTime;
+	private Date expiresTime;
 	
 	private String sex;
 	private boolean active;
@@ -270,7 +270,7 @@ public class UserInfo {
 	 * 
 	 * @return access token的过期时间
 	 */
-	public Long getExpiresTime() {
+	public Date getExpiresTime() {
 		return expiresTime;
 	}
 
@@ -279,7 +279,7 @@ public class UserInfo {
 	 * 
 	 * @param expiresTime access token的过期时间
 	 */
-	public void setExpiresTime(Long expiresTime) {
+	public void setExpiresTime(Date expiresTime) {
 		this.expiresTime = expiresTime;
 	}
 	

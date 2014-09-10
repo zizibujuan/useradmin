@@ -2,6 +2,7 @@ package com.zizibujuan.useradmin.server.servlets.connect;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -86,7 +87,9 @@ public class QQUserConnect extends UserConnect {
 				com.zizibujuan.useradmin.server.model.UserInfo dripUser = new com.zizibujuan.useradmin.server.model.UserInfo();
 				dripUser.setNickName(qzoneUserInfoBean.getNickname());
 				dripUser.setAccessToken(accessToken);
-				dripUser.setExpiresTime(tokenExpireIn);
+				Calendar now = Calendar.getInstance();
+				now.add(Calendar.SECOND, (int)tokenExpireIn);
+				dripUser.setExpiresTime(now.getTime());
 				
 				String sex = "";
 				String qqGender = qzoneUserInfoBean.getGender();
