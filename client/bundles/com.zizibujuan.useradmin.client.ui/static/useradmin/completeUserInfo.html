@@ -7,6 +7,7 @@
 <title>完善用户信息</title>
 <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <script src="/jquery/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="/jquery/jquery.json.min.js"></script>
 <script src="/bootstrap/js/bootstrap.min.js"></script>
  <script type="text/javascript">
  $(document).ready(function(){
@@ -27,7 +28,7 @@
 	 
 	 btnSave.on("click", function(e){
 		 var data = getFormData();
-		 $.post("completeUserInfo", data).done(function(data){
+		 $.post("completeUserInfo", $.toJSON(data)).done(function(data){
 			 // 跳到目标页面，目前就这一个目标页面，所以硬编码
 			 window.location.href = "/files/new";
 		 }).fail(function(){
