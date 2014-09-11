@@ -75,6 +75,9 @@ public class LoginServlet extends BaseServlet {
 			String site = path.segment(0);
 			UserConnect connect = null;
 			if (site.equals("qq")) {
+				// TODO: 如果用户已使用qq授权登录过，则应该直接登录成功，而不是每次都要授权
+				// TODO: 如果用户选择记住用户信息，则直接后台登录成功
+				// TODO: 如果用户已完善过用户信息，则跳过完善步骤
 				connect = new QQUserConnect();
 				connect.manager(req, resp);
 				return;
