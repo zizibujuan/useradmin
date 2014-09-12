@@ -118,7 +118,7 @@ public class QQUserConnect extends UserConnect {
 		} catch (QQConnectException e) {
 			e.printStackTrace();
 		}
-		resp.sendRedirect(needComplete ? "/completeUserInfo" : "/");
+		resp.sendRedirect(needComplete ? "/completeUserInfo" : "/files/new" /*跳转到新建文档页面*/);
 	}
 	
 }
