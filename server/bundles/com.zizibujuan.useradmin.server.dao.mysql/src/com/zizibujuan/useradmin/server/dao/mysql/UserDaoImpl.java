@@ -328,12 +328,13 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 	private static final String SQL_UPDATE_USER_NICKNAME_EMAIL = "UPDATE "
 			+ "DRIP_USER_INFO "
 			+ "SET "
+			+ "LOGIN_NAME=?,"
 			+ "NICK_NAME=?, "
 			+ "EMAIL=? "
 			+ "WHERE DBID=?";
 	@Override
-	public void completeUserInfo(long userId, String nickName, String email) {
-		DatabaseUtil.update(getDataSource(), SQL_UPDATE_USER_NICKNAME_EMAIL, nickName, email, userId);
+	public void completeUserInfo(long userId, String loginName, String nickName, String email) {
+		DatabaseUtil.update(getDataSource(), SQL_UPDATE_USER_NICKNAME_EMAIL, loginName, nickName, email, userId);
 	}
 
 	

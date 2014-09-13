@@ -11,15 +11,20 @@
 <script src="/bootstrap/js/bootstrap.min.js"></script>
  <script type="text/javascript">
  $(document).ready(function(){
-	 var txtUserName = $("#txtUserName");
+	 var txtLoginName = $("#txtLoginName");
+	 var txtNickName = $("#txtNickName");
 	 var txtEmail = $("#txtEmail");
 	 var btnSave = $("#btnSave");
 	 // 从session中加载qq用户名
 	 $.getJSON("/users/", function(data){
-		 txtUserName.val(data.nickName);
+		 txtNickName.val(data.nickName);
 	 });
 
-	 txtUserName.on("input", function(e){
+	 txtLoginName.on("input", function(e){
+		validateForm();
+	 });
+	 
+	 txtNickName.on("input", function(e){
 		validateForm();
 	 });
 	 txtEmail.on("input", function(e){
@@ -38,6 +43,7 @@
 	
 	
 	function validateForm(){
+		// TODO: 校验用户名，邮箱是否被使用
 		var userInfo = getFormData();
 		var result = validate(userInfo);
 		if(result){
@@ -48,16 +54,21 @@
 	}
 	
 	function getFormData(){
-		var nickName = txtUserName.val().trim();
+		var loginName = txtLoginName.val().trim();
+		var nickName = txtNickName.val().trim();
 		var email = txtEmail.val().trim();
 		return {
+			"loginName": loginName,
 			"nickName": nickName,
 			"email": email
 		};
 	}
 	
 	function validate(userInfo){
-		return userInfo.nickName != "" &&
+		// TODO：显示校验不通过时的提示信息
+		return 
+			userInfo.loginName != "" &&
+			userInfo.nickName != "" &&
 			userInfo.email != "" &&
 			checkEmail(userInfo.email);
 	}
@@ -76,9 +87,13 @@
   </div>
   <div class="panel-body">
     <form role="form">
+      <div class="form-group">
+	    <label for="txtLoginName">用户名(必填, 只能使用英文字母，数字与下划线)</label>
+	    <input type="text" required class="form-control" id="txtLoginName">
+	  </div>
 	  <div class="form-group">
-	    <label for="txtUserName">用户名(必填)</label>
-	    <input type="text" required class="form-control" id="txtUserName">
+	    <label for="txtNickName">昵称(必填)</label>
+	    <input type="text" required class="form-control" id="txtNickName">
 	  </div>
 	  <div class="form-group">
 	    <label for="txtEmail">邮箱(必填)</label>

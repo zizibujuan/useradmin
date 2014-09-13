@@ -204,8 +204,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void completeUserInfo(long userId, String nickName, String email) {
-		userDao.completeUserInfo(userId, nickName, email);
+	public void completeUserInfo(long userId, String loginName, String nickName, String email) {
+		userDao.completeUserInfo(userId, loginName, nickName, email);
 	}
 	
 	
