@@ -66,8 +66,7 @@
 	
 	function validate(userInfo){
 		// TODO：显示校验不通过时的提示信息
-		return 
-			userInfo.loginName != "" &&
+		return userInfo.loginName != "" &&
 			userInfo.nickName != "" &&
 			userInfo.email != "" &&
 			checkEmail(userInfo.email);
