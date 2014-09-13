@@ -35,6 +35,7 @@ public class QQUserConnect extends UserConnect {
 	private static final Logger logger = LoggerFactory.getLogger(QQUserConnect.class);
 	private UserBindService userBindService = UserAdminServiceHolder.getDefault().getUserBindService();
 
+	// 如何避免多次显示授权信息？
 	@Override
 	protected void toLoginPage(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		try {
