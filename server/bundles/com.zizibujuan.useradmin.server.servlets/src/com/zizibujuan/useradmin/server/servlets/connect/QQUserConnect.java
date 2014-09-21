@@ -39,6 +39,9 @@ public class QQUserConnect extends UserConnect {
 	@Override
 	protected void toLoginPage(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		try {
+			if(req.getParameter("returnUrl") != null){
+				req.getSession().setAttribute("loginReturnUrl", req.getParameter("returnUrl"));
+			}
         	resp.sendRedirect(new Oauth().getAuthorizeURL(req));
         } catch (QQConnectException e) {
             logger.error("获取qq登录页面失败", e);
@@ -119,7 +122,14 @@ public class QQUserConnect extends UserConnect {
 		} catch (QQConnectException e) {
 			e.printStackTrace();
 		}
-		resp.sendRedirect(needComplete ? "/completeUserInfo" : "/files/new" /*跳转到新建文档页面*/);
+		
+		String redirectUrl = "/files/new"; //"/files/edit"
+		Object oReturnUrl = req.getSession().getAttribute("loginReturnUrl");
+		if(oReturnUrl != null){
+			redirectUrl = oReturnUrl.toString();
+			req.getSession().removeAttribute("loginReturnUrl");
+		}
+		resp.sendRedirect(needComplete ? "/completeUserInfo" : redirectUrl);
 	}
 	
 }
