@@ -15,6 +15,10 @@
 	 var txtNickName = $("#txtNickName");
 	 var txtEmail = $("#txtEmail");
 	 var btnSave = $("#btnSave");
+	 var divAlert = $("#divAlert");
+	 
+	 var errors = [];
+	 
 	 // 从session中加载qq用户名
 	 $.getJSON("/users/", function(data){
 		 txtNickName.val(data.nickName);
@@ -45,12 +49,30 @@
 	function validateForm(){
 		// TODO: 校验用户名，邮箱是否被使用
 		var userInfo = getFormData();
-		var result = validate(userInfo);
-		if(result){
+		validate(userInfo);
+		if(errors.length == 0){
+			// 清空错误信息
+			clearErrors();
+			
 			btnSave.attr("disabled", false);
 		}else{
+			// 显示错误信息
+			showErrors();
 			btnSave.attr("disabled", true);
 		}
+	}
+	
+	function showErrors(){
+		divAlert.empty();
+		$.each(errors, function(index, item){
+			$("<div></div>").html(item).appendTo(divAlert);
+		});
+		divAlert.show();
+	}
+	
+	function clearErrors(){
+		divAlert.empty();
+		divAlert.hide();
 	}
 	
 	function getFormData(){
@@ -64,22 +86,51 @@
 		};
 	}
 	
+	
 	function validate(userInfo){
 		// TODO：显示校验不通过时的提示信息
-		return userInfo.loginName != "" &&
-			userInfo.nickName != "" &&
-			userInfo.email != "" &&
-			checkEmail(userInfo.email);
+		errors = [];
+		
+		var email = userInfo.email;
+		var loginName = userInfo.loginName;
+		var nickName = userInfo.nickName;
+		
+		// 用户名
+		// TODO： 需要后台校验用户名是否被使用
+		if(loginName == ""){
+			errors.push("请输入用户名");
+		}else if(loginName.length > 20){// 无需计算中文字符，因为下面限制为不能输入中文字符
+			errors.push("用户名不能多于20个字符")
+		}else if(!/^(?![-_])[a-zA-Z0-9_-]+$/.test(loginName)){
+			errors.push("用户名只能包含英文字母，数字,-或_，不能以-或_开头，不区分大小写");
+		}
+		
+		
+		// 昵称
+		if(nickName == ""){
+			errors.push("请输入昵称");
+		}else if(nickName.length > 15){
+			errors.push("昵称不能多于15个字符")
+		}
+		
+		// 邮箱
+		// TODO：需要后台校验用户名是否被使用
+		if(email == ""){
+			errors.push("请输入常用邮箱");
+		}else if(email.length > 50){
+			errors.push("邮箱不能超过50个字符");
+		}else if(!/[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}/.test(email)){
+			errors.push("邮箱格式不正确");
+		}
 	}
-	
-	function checkEmail(email){
-		var emailRegExp = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-		return emailRegExp.test(email);
-	}
+
  });
  </script>
 </head>
 <body>
+
+<div class="alert alert-danger" role="alert" id="divAlert" style="display:none"></div>
+
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">完善用户信息</h3>
@@ -87,7 +138,7 @@
   <div class="panel-body">
     <form role="form">
       <div class="form-group">
-	    <label for="txtLoginName">用户名(必填, 只能使用英文字母，数字与下划线)</label>
+	    <label for="txtLoginName">用户名(必填, 只能包含英文字母，数字,-或_，不能以-或_开头，不区分大小写)</label>
 	    <input type="text" required class="form-control" id="txtLoginName">
 	  </div>
 	  <div class="form-group">
